@@ -22,7 +22,7 @@ public class LocalizationApplication implements CommandLineRunner {
        // service.listarCidadesPorNome();
         var cidade = new Cidade(null, "Porto Alegre", null);
         service.filtroDinamico(cidade).forEach(System.out::println);
-
+        service.listarCidadesSpecsFiltroDinamico(cidade);
     }
 
 
