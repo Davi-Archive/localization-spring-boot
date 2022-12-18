@@ -1,17 +1,20 @@
 package com.davi.localization.domain.repository;
 
 import com.davi.localization.domain.entity.Cidade;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 
 public interface CidadeRepository extends JpaRepository<Cidade, Long>, JpaSpecificationExecutor<Cidade> {
+
+    @Query(nativeQuery = true, value = " select c.id_cidade as id, c.nome from tb_cidade as c where c.nome =:nome ")
+    List<Cidade> findByNomeSqlNativo(@Param("nome") String nome);
+
 
     // busca pelo nome correto
     List<Cidade> findByNome(String nome);

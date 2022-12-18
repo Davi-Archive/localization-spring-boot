@@ -63,6 +63,12 @@ public class CidadeService {
         repository.findAll(spec);
     }
 
+    public void listarCidadesPorNomeSQLNativo() {
+        repository.findByNomeSqlNativo("São Paulo")
+                .stream().map(cidadeProjection -> new Cidade(cidadeProjection.getId(),cidadeProjection.getNome(),null))
+                .forEach(System.out::println);
+    }
+
     public void listarCidadesSpecsFiltroDinamico(Cidade filtro) {
         Specification<Cidade> specs = Specification
                 .where((root, query, cb) -> cb.conjunction());
