@@ -4,10 +4,17 @@ import com.davi.localization.domain.entity.Cidade;
 import com.davi.localization.domain.repository.CidadeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.davi.localization.domain.repository.specs.CidadeSpecs.habitantesGreaterThan;
+import static com.davi.localization.domain.repository.specs.CidadeSpecs.nomeEqual;
 
 @Service
 public class CidadeService {
@@ -48,6 +55,12 @@ public class CidadeService {
 //                .findByHabitantesLessThanAndNomeLike(null, "Porto");
 
         return repository.findAll(example);
+    }
+
+    public void listarCidadesByNomeSpec() {
+        Specification<Cidade> spec = nomeEqual("São Paulo")
+                .and(habitantesGreaterThan(1000L));
+        repository.findAll(spec);
     }
 
 }
