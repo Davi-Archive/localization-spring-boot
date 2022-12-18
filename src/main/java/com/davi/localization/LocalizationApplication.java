@@ -31,7 +31,7 @@ public class LocalizationApplication implements CommandLineRunner {
         cidadeRepository.findAll().forEach(System.out::println);
     }
     void listarCidadesPorNome() {
-        cidadeRepository.findByNome("Porto Velho").forEach(System.out::println);
+        cidadeRepository.findByNomeLike("%a%").forEach(System.out::println);
     }
     void listarCidadesPorHabitates() {
         cidadeRepository.findByHabitantes(1000000L).forEach(System.out::println);
