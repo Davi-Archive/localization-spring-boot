@@ -3,5 +3,23 @@ package com.davi.localization.domain.repository;
 import com.davi.localization.domain.entity.Cidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CidadeRepository extends JpaRepository<Cidade,Long> {
+import java.util.List;
+
+
+public interface CidadeRepository extends JpaRepository<Cidade, Long> {
+
+    // busca pelo nome correto
+    List<Cidade> findByNome(String nome);
+
+    // busca pelo nome comecando por aquele pedaço
+    List<Cidade> findByNomeStartingWith(String nome);
+
+    // busca pelo nome terminando por aquele pedaço
+    List<Cidade> findByNomeEndingWith(String nome);
+
+    // busca pelo nome contendo aquele pedaço
+    List<Cidade> findByNomeContaining(String nome);
+
+    // Busca por habitantes
+    List<Cidade> findByHabitantes(Long habitantes);
 }
